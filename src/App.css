@@ -24,6 +24,19 @@
   height: 40vmin;
   pointer-events: none;
 }
+a, a:visited, a:active {
+  color: inherit;
+  text-decoration: none;
+ }
+/* .list-button {
+  margin: -px;
+  width: 60px;
+  padding: 10px;
+  background-color: grey;
+  border: solid 1px;
+  cursor: pointer;
+
+} */
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -107,6 +120,22 @@
   height: 38px;
   padding-left: 30px;
   border: solid 1px grey;
+  float:inline-end;
+  font-size: 16px;
+  transition: 0.4s;
+
+  /* width: 400px;
+  margin: 20px;
+  height: 38px;
+  padding-left: 30px;
+  border: solid 2px grey;
+  float:left;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 10px; */
+
 }
 @keyframes App-logo-spin {
   from {

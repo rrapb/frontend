@@ -23,7 +23,7 @@ function App() {
         <Route path = '/add' element = {<AddProduct></AddProduct>}></Route>
         <Route path = '/update/:id' element = {<UpdateProduct></UpdateProduct>}></Route>
         <Route path = '/logout' element = {<h1>Logout Component</h1>}></Route>
-        <Route path = '/profile' element = {<h1>Profile Component</h1>}></Route>
+        {/* <Route path = '/profile' element = {<h1>Profile Component</h1>}></Route> */}
         </Route>
              {/* Required Non auth Route */}
 

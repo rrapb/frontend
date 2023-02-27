@@ -21,12 +21,15 @@ const ProductList = () => {
         let result = await fetch(`http://localhost:5000/products/${id}`, {
             method: 'Delete',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                authorization:`bearer ${JSON.parse(localStorage.getItem('token'))}`
             }
         })
         result = await result.json();
+        
         if(result){
-            getProducts();
+           alert('You want to delete this product!')
+           getProducts();
         }
 
     }
@@ -34,7 +37,11 @@ const ProductList = () => {
     const searchHandler = async (event) => {
         let key = event.target.value;
         if(key){
-            let result = await fetch(`http://localhost:5000/search/${key}`)
+            let result = await fetch(`http://localhost:5000/search/${key}`, {
+                headers:{
+                    authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
+                }
+            })
         result = await result.json();
         if(result){
             setProducts(result);
@@ -66,7 +73,7 @@ const ProductList = () => {
                     <li>{product.category}</li>
                     <li>
                         <button onClick={()=>deleteProduct(product._id)}>Delete</button>
-                        <Link to ={'/update/'+product._id}> Update </Link></li>
+                        <button><Link to ={'/update/'+product._id}> Update </Link></button></li>
                 </ul>
                 )
                 :<h1>No Result Found</h1>
