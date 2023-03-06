@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios'
 
 const UpdateProduct =()=>{
     const [name, setName] = React.useState('');
@@ -15,16 +16,16 @@ const UpdateProduct =()=>{
     }, [])
 
     const getProductDetails = async () => {
-        let result = await fetch (`http://localhost:5000/products/${params.id}`, {
+        let result = await axios(`http://localhost:5000/products/${params.id}`, {
             headers: {
                 authorization:`bearer ${JSON.parse(localStorage.getItem('token'))}`
             }
         });
-        result = await result.json();
-        setName(result.name)
-        setPrice(result.price)
-        setCategory(result.category)
-        setCompany(result.company)
+        // result = await result.json();
+        setName(result.data.name)
+        setPrice(result.data.price)
+        setCategory(result.data.category)
+        setCompany(result.data.company)
     }
 
     const updateProduct = async () => {
@@ -32,16 +33,16 @@ const UpdateProduct =()=>{
             setError(true);
             return false;   
         }
-        let result = await fetch(`http://localhost:5000/products/${params.id}`, {
-            method:'Put',
-            body: JSON.stringify({name, price, category, company}),
+        let result = await axios.put(`http://localhost:5000/products/${params.id}`,JSON.stringify({name, price, category, company}), {
+            // method:'Put',
+            // body: JSON.stringify({name, price, category, company}),
             headers: {
                 'Content-Type': 'Application/json',
                 authorization:`bearer ${JSON.parse(localStorage.getItem('token'))}`
             }
         })
-        result = await result.json();
-        if(result){
+        // result = await result.json();
+        if(result.data){
             alert('Product updated')
             navigate('/')
         }

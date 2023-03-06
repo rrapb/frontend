@@ -1,55 +1,86 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import api from "./api";
+const baseURL = "https://jsonplaceholder.typicode.com/products";
 const ProductList = () => {
+
     const [products, setProducts] = useState([]);
+
+    // React.useEffect(() => {
+    //     axios.get(baseURL).then((response) => {
+    //       setPost(response.data);
+    //     });
+    //   }, []);
+    
 
     useEffect(() => {
         getProducts();
     }, []);
 
     const getProducts = async () => {
-        let result = await fetch('http://localhost:5000/products', {
+        let result = await axios('http://localhost:5000/products', {
             headers:{
                 authorization:`bearer ${JSON.parse(localStorage.getItem('token'))}`
             }
-        });
-        result = await result.json();
-        setProducts(result);
-    }
-
-    const deleteProduct = async (id) => {
-        let result = await fetch(`http://localhost:5000/products/${id}`, {
-            method: 'Delete',
-            headers: {
-                "Content-Type": "application/json",
-                authorization:`bearer ${JSON.parse(localStorage.getItem('token'))}`
-            }
         })
-        result = await result.json();
-        
-        if(result){
-           alert('You want to delete this product!')
-           getProducts();
-        }
-
+        // result = await result.json();
+        setProducts(result.data);
     }
+
+    // const deleteProduct = async (id) => {
+    //     let result = await fetch(`http://localhost:5000/products/${id}`, {
+    //         method: 'Delete',
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             authorization:`bearer ${JSON.parse(localStorage.getItem('token'))}`
+    //         }
+    //     })
+    //     result = await result.json();
+        
+    //     if(result){
+    //        alert('You want to delete this product!')
+    //        getProducts();
+    //     }
+
+    // }
+
+    const deleteProduct = (id) => {
+        let result = axios.delete(`http://localhost:5000/products/${id}`, {
+    headers: {
+    Authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
+    }
+
+    })
+    if(result){
+        alert('You want to delete this product!')
+        getProducts();
+    }
+ }
+    
+    
+
 
     const searchHandler = async (event) => {
         let key = event.target.value;
         if(key){
-            let result = await fetch(`http://localhost:5000/search/${key}`, {
-                headers:{
-                    authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
-                }
+            let result = await axios(`http://localhost:5000/search/${key}`, {
+                headers: {
+                    Authorization: `bearer ${JSON.parse(localStorage.getItem('token'))}`
+                    }
             })
-        result = await result.json();
+            
+        //  result = await result.json();
+       
         if(result){
-            setProducts(result);
+            setProducts(result.data);
         }
     }else{
         getProducts();
     }   
 }
+
+
         
 
 
