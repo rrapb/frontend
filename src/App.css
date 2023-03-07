@@ -1,3 +1,5 @@
+/* @import '~and/dist/antd.css'; */
+
 .nav-ul {
   padding: 5px;
   margin: 0px;
@@ -38,11 +40,28 @@ a, a:visited, a:active {
 
 } */
 
+/* .App {
+  margin-top: 100px;
+} */
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
+h1 {
+  margin-left: 1.2rem;
+}
+
+.datepicker {
+  margin-left: 1.2rem;
+}
+.search-space {
+  margin-top: 10px;
+  margin-left: -200px;
+  margin-bottom: 50px;
+}
+
 
 .App-header {
   background-color: #282c34;
@@ -102,13 +121,30 @@ a, a:visited, a:active {
 .product-list {
   text-align: center;
   margin-top: 50px;
+  
 }
 
+h3 {
+  margin: auto;
+  /* margin-left: -200px; */
+  margin-right: 250px;
+}
+.list {
+  margin-left: -50px;
+}
 .product-list ul li {
   display: inline-block;
   width: 150px;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   padding: 5px;
+}
+
+.update-button {
+  margin-left: 0.8px;
+}
+
+.sign-up-button {
+  margin-left: 20px;
 }
 
 .product-list ul{
