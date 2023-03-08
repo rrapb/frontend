@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import api from "./api";
 import { AudioOutlined } from "@ant-design/icons";
 import { Input, Space, Table, List, Button } from "antd";
 
 const { Column, ColmnGroup } = Table;
 
 const { Search } = Input;
-const baseURL = "https://jsonplaceholder.typicode.com/products";
 
 const suffix = (
   <AudioOutlined
@@ -21,8 +18,6 @@ const suffix = (
 );
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const params = useParams();
-
   // React.useEffect(() => {
   //     axios.get(baseURL).then((response) => {
   //       setPost(response.data);
@@ -152,7 +147,7 @@ const ProductList = () => {
         <li>Category</li>
         <li>Operation</li>
       </ul> */}
-      <Table pagination={false} size="small" dataSource={products}>
+      <Table pagination={false} size="small" dataSource={[...products]}>
         <Column
           width={50}
           align={"center"}
